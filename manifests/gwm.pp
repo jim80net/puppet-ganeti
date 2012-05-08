@@ -44,8 +44,10 @@ class ganeti_tutorial::gwm {
             cwd     => "/root/ganeti_webmgr",
             timeout => "400",
             creates => "/root/ganeti_webmgr/bin/activate",
+            logoutput => true,
             require => [ Package["fabric"], Package["virtualenv"], 
-                        Package["python-dev"], Exec["unpack-gwm"] ];
+                        Package["python-dev"], Package["python-simplejson"],
+                        Exec["unpack-gwm"] ];
     }
 
     service {

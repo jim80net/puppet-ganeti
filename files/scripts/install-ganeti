@@ -1,4 +1,4 @@
 #!/bin/bash
-./configure --localstatedir=/var --sysconfdir=/etc
+./configure --localstatedir=/var --sysconfdir=/etc --enable-htools --enable-htools-rapi
 make
 make install

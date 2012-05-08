@@ -14,6 +14,12 @@ class ganeti_tutorial::install_deps {
         "python-pycurl":    ensure => installed;
         "socat":            ensure => installed;
         "python-paramiko":  ensure => installed;
+        # htools deps
+        "ghc6":                 ensure  => installed;
+        "libghc6-json-dev":     ensure  => installed;
+        "libghc6-network-dev":  ensure  => installed;
+        "libghc6-parallel-dev": ensure  => installed;
+        "libghc6-curl-dev":     ensure  => installed;
         # Misc
         "vim":              ensure => installed;
         "screen":           ensure => installed;

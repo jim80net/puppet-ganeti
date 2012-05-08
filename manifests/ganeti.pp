@@ -24,7 +24,11 @@ class ganeti_tutorial::ganeti::install {
             command => "/vagrant/modules/ganeti_tutorial/files/scripts/install-ganeti",
             cwd     => "/root/src/ganeti-${ganeti_version}",
             creates => "/usr/local/sbin/gnt-cluster",
-            require => Ganeti_tutorial::Unpack["ganeti"];
+            require => [ Ganeti_tutorial::Unpack["ganeti"], Package["ghc6"],
+                        Package["libghc6-json-dev"],
+                        Package["libghc6-network-dev"],
+                        Package["libghc6-parallel-dev"],
+                        Package["libghc6-curl-dev"], ];
     }
 
     service {
