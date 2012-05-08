@@ -10,8 +10,6 @@ class ganeti_tutorial {
     file {
         "/root/.ssh":
             ensure  => directory;
-        "/etc/ganeti":
-            ensure  => directory;
         "/var/lib/ganeti":
             ensure  => directory;
         "/var/lib/ganeti/rapi/":

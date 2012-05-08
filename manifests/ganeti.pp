@@ -8,7 +8,13 @@ class ganeti_tutorial::ganeti::install {
             ensure  => present,
             require => Exec["install-ganeti"],
             source  => "/root/src/ganeti-${ganeti_version}/doc/examples/ganeti.initd",
-            mode    => 755,
+            mode    => 755;
+        "/etc/ganeti":
+            ensure  => directory;
+        "/etc/ganeti/kvm-vif-bridge":
+            ensure  => present,
+            require => File["/etc/ganeti"],
+            content => "";
     }
 
     ganeti_tutorial::unpack {
