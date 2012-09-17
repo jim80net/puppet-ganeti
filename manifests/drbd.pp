@@ -1,5 +1,5 @@
-class ganeti_tutorial::drbd inherits ganeti_tutorial::params {
-  $package_name = $ganeti_tutorial::params::drbd8_utils_package_name
+class ganeti::drbd inherits ganeti::params {
+  $package_name = $ganeti::params::drbd8_utils_package_name
 
     package {
       "drbd8-utils":
@@ -10,10 +10,10 @@ class ganeti_tutorial::drbd inherits ganeti_tutorial::params {
   file {
     "/etc/modules":
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/modules";
-    "/etc/modprobe.d/local.conf":
+      source  => "puppet:///modules/ganeti/modules";
+    "/etc/modprobe.d/drbd.conf":
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/modprobe.conf",
+      source  => "puppet:///modules/ganeti/modprobe.d_drbd.conf",
       notify  => Exec["modprobe_drbd"];
   }
 
@@ -22,7 +22,7 @@ class ganeti_tutorial::drbd inherits ganeti_tutorial::params {
       command => "/sbin/modprobe drbd",
       creates => "/sys/module/drbd/parameters/usermode_helper",
       require => [
-        File["/etc/modprobe.d/local.conf"], Package["drbd8-utils"], ],
+        File["/etc/modprobe.d/drbd.conf"], Package["drbd8-utils"], ],
   }
 
   service {

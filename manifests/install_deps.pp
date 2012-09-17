@@ -1,9 +1,9 @@
-class ganeti_tutorial::install_deps {
-  $iputils_arping   = $ganeti_tutorial::params::iputils_arping
-  $python_openssl   = $ganeti_tutorial::params::python_openssl
-  $python_pyinotify = $ganeti_tutorial::params::python_pyinotify
-  $python_pyparsing = $ganeti_tutorial::params::python_pyparsing
-  $vim_package_name = $ganeti_tutorial::params::vim_package_name
+class ganeti::install_deps {
+  $iputils_arping   = $ganeti::params::iputils_arping
+  $python_openssl   = $ganeti::params::python_openssl
+  $python_pyinotify = $ganeti::params::python_pyinotify
+  $python_pyparsing = $ganeti::params::python_pyparsing
+  $vim_package_name = $ganeti::params::vim_package_name
 
   package {
     # Ganeti deps
@@ -30,7 +30,7 @@ class ganeti_tutorial::install_deps {
   file {
     "/root/src":
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/src/",
+      source  => "puppet:///modules/ganeti/src/",
       require => Package["make"],
       recurse => true;
   }

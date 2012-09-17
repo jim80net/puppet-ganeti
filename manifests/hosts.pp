@@ -1,4 +1,4 @@
-class ganeti_tutorial::hosts {
+class ganeti::hosts {
   host {
     "ganeti.example.org":
       ensure        => present,

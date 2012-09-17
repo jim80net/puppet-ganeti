@@ -1,4 +1,4 @@
-class ganeti_tutorial::apt {
+class ganeti::apt {
   Exec["apt_update"] -> Package <| |>
 
   exec {

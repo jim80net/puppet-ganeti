@@ -1,7 +1,7 @@
-class ganeti_tutorial::gwm {
-  $python_dev  = $ganeti_tutorial::params::python_dev
-  $gwm_version = $ganeti_tutorial::params::gwm_version
-  $fab_path    = $ganeti_tutorial::params::fab_path
+class ganeti::gwm {
+  $python_dev  = $ganeti::params::python_dev
+  $gwm_version = $ganeti::params::gwm_version
+  $fab_path    = $ganeti::params::fab_path
 
   package {
     "python-dev":   ensure => "installed", name => $python_dev, ;
@@ -16,7 +16,7 @@ class ganeti_tutorial::gwm {
       provider  => "pip";
   }
 
-  ganeti_tutorial::unpack {
+  ganeti::unpack {
     "gwm":
       source  => "/root/src/ganeti-webmgr-${gwm_version}.tar.gz",
       cwd     => "/root/",
@@ -28,14 +28,14 @@ class ganeti_tutorial::gwm {
     "/root/ganeti_webmgr/settings.py":
       ensure  => present,
       source  => "/root/ganeti_webmgr/settings.py.dist",
-      require => Ganeti_Tutorial::Unpack["gwm"];
+      require => Ganeti::Unpack["gwm"];
     "/etc/init.d/vncap":
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/gwm/vncap",
+      source  => "puppet:///modules/ganeti/gwm/vncap",
       mode    => 755;
     "/etc/init.d/flashpolicy":
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/gwm/flashpolicy",
+      source  => "puppet:///modules/ganeti/gwm/flashpolicy",
       mode    => 755;
   }
 
@@ -59,13 +59,13 @@ class ganeti_tutorial::gwm {
   }
 
   case $osfamily {
-    redhat:   { include ganeti_tutorial::redhat::gwm }
+    redhat:   { include ganeti::redhat::gwm }
     default:  { }
   }
 }
 
-class ganeti_tutorial::gwm::initialize {
-  $files       = $ganeti_tutorial::params::files
+class ganeti::gwm::initialize {
+  $files       = $ganeti::params::files
 
   exec {
     "syncdb-gwm":

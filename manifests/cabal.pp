@@ -1,4 +1,4 @@
-class ganeti_tutorial::cabal {
+class ganeti::cabal {
   exec { "update-cabal":
     command => "/usr/bin/cabal update",
     require => Package["cabal-install"],
@@ -7,7 +7,7 @@ class ganeti_tutorial::cabal {
   package { "cabal-install": ensure => installed; }
 }
 
-define ganeti_tutorial::cabal::install($version="") {
+define ganeti::cabal::install($version="") {
   if $version { 
     exec { "cabal-$name-$version":
       command => "/usr/bin/cabal install --global ${name}-${version}",

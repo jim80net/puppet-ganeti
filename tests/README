@@ -1,0 +1,7 @@
+Puppet module unit tests are executed as follows: 
+
+# EXAMPLE: 
+# puppet apply --modulepath /opt/puppet/modules --verbose --noop /opt/puppet/modules/users/tests/combined.pp
+
+Exclude the "noop" option to actually run the module.
+

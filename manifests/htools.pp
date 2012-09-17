@@ -1,10 +1,10 @@
-class ganeti_tutorial::htools {
-  $htools_version         = $ganeti_tutorial::params::htools_version
-  $ghc_package_name       = $ganeti_tutorial::params::ghc_package_name
-  $libghc_curl_dev        = $ganeti_tutorial::params::libghc_curl_dev
-  $libghc_json_dev        = $ganeti_tutorial::params::libghc_json_dev
-  $libghc_network_dev     = $ganeti_tutorial::params::libghc_network_dev
-  $libghc_parallel_dev    = $ganeti_tutorial::params::libghc_parallel_dev
+class ganeti::htools {
+  $htools_version         = $ganeti::params::htools_version
+  $ghc_package_name       = $ganeti::params::ghc_package_name
+  $libghc_curl_dev        = $ganeti::params::libghc_curl_dev
+  $libghc_json_dev        = $ganeti::params::libghc_json_dev
+  $libghc_network_dev     = $ganeti::params::libghc_network_dev
+  $libghc_parallel_dev    = $ganeti::params::libghc_parallel_dev
 
   package {
     "ghc":
@@ -25,7 +25,7 @@ class ganeti_tutorial::htools {
   }
 
   if "$ganeti_version" < "2.5.0" {
-    ganeti_tutorial::unpack {
+    ganeti::unpack {
       "htools":
         source  => "/root/src/ganeti-htools-${htools_version}.tar.gz",
         cwd     => "/root/src",
@@ -33,7 +33,7 @@ class ganeti_tutorial::htools {
         require => Ganeti_tutorial::Wget["htools-tgz"];
     }
 
-    ganeti_tutorial::wget {
+    ganeti::wget {
       "htools-tgz":
         source      => "http://ganeti.googlecode.com/files/ganeti-htools-${htools_version}.tar.gz",
         destination => "/root/src/ganeti-htools-${htools_version}.tar.gz",
@@ -42,7 +42,7 @@ class ganeti_tutorial::htools {
 
     exec {
       "install-htools":
-        command => "/vagrant/modules/ganeti_tutorial/files/scripts/install-htools",
+        command => "/vagrant/modules/ganeti/files/scripts/install-htools",
         cwd     => "/root/src/ganeti-htools-${htools_version}",
         creates => "/usr/local/sbin/hbal",
         require => [ Package["ghc"], Package["libghc6-json-dev"],

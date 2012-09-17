@@ -1,10 +1,10 @@
-class ganeti_tutorial::debian {
+class ganeti::debian {
   package {
     "qemu-utils": ensure => installed;
   }
 }
 
-class ganeti_tutorial::debian::instance_image inherits ganeti_tutorial::instance_image {
+class ganeti::debian::instance_image inherits ganeti::instance_image {
   Exec["install-instance-image"] {
     require +> Package["qemu-utils"],
   }

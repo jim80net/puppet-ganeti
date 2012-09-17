@@ -1,5 +1,5 @@
-class ganeti_tutorial::kvm {
-  $kvm_package_name = $ganeti_tutorial::params::kvm_package_name
+class ganeti::kvm {
+  $kvm_package_name = $ganeti::params::kvm_package_name
 
   package {
     "kvm":  ensure => installed, name => $kvm_package_name;

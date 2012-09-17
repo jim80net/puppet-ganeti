@@ -1,14 +1,12 @@
-# Puppet Configs for a Ganeti Tutorial
+# Puppet Ganeti Module
 
-This module is *not* intended for _production_ use and only used as an
-_instructional tool_. It will setup two ganeti nodes with the basics to install
+This module was modified from: [Puppet Configs for a Ganeti Tutorial](https://github.com/ramereth/puppet-ganeti-tutorial)
+
+This module is customized for use on a network with prefixes 172.26. This is hard coded.
+It will setup ganeti nodes with the basics to install
 [Ganeti](http://code.google.com/p/ganeti/), [Ganeti Instance
 Image](http://code.osuosl.org/projects/ganeti-image), and [Ganeti Web
 Manager](http://code.osuosl.org/projects/ganeti-webmgr).
-
-This module will be used for [Hands on Virtualization with
-Ganeti](http://www.oscon.com/oscon2011/public/schedule/detail/18544) at [OSCON
-2011](http://oscon.com).
 
 # Requirements
 

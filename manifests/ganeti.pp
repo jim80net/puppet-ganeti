@@ -1,8 +1,8 @@
-class ganeti_tutorial::ganeti::install {
-  include ganeti_tutorial::htools
+class ganeti::ganeti::install {
+  include ganeti::htools
 
-  $ganeti_init_source = $ganeti_tutorial::params::ganeti_init_source
-  $files              = $ganeti_tutorial::params::files
+  $ganeti_init_source = $ganeti::params::ganeti_init_source
+  $files              = $ganeti::params::files
 
   file {
     "/etc/init.d/ganeti":
@@ -27,12 +27,12 @@ class ganeti_tutorial::ganeti::install {
         revision  => "${ganeti_version}";
     }
   } else {
-    ganeti_tutorial::unpack {
+    ganeti::unpack {
       "ganeti":
         source  => "/root/src/ganeti-${ganeti_version}.tar.gz",
         cwd     => "/root/src/",
         creates => "/root/src/ganeti-${ganeti_version}",
-        require => Ganeti_tutorial::Wget["ganeti-tgz"];
+        require => Ganeti::Wget["ganeti-tgz"];
     }
   }
 
@@ -42,7 +42,7 @@ class ganeti_tutorial::ganeti::install {
         command => "${files}/scripts/install-ganeti",
         cwd     => "/root/src/ganeti-${ganeti_version}",
         creates => "/usr/local/sbin/gnt-cluster",
-        require => Ganeti_tutorial::Unpack["ganeti"];
+        require => Ganeti::Unpack["ganeti"];
     }
   } else {
     exec {
@@ -51,13 +51,13 @@ class ganeti_tutorial::ganeti::install {
           "${files}/scripts/install-ganeti --enable-htools --enable-htools-rapi",
         cwd     => "/root/src/ganeti-${ganeti_version}",
         creates => "/usr/local/sbin/gnt-cluster",
-        require => [ Ganeti_tutorial::Unpack["ganeti"], Package["ghc"],
+        require => [ Ganeti::Unpack["ganeti"], Package["ghc"],
           Package["libghc6-json-dev"], Package["libghc6-network-dev"],
           Package["libghc6-parallel-dev"], Package["libghc6-curl-dev"], ];
     }
   }
 
-  ganeti_tutorial::wget {
+  ganeti::wget {
     "ganeti-tgz":
       source      => "http://ganeti.googlecode.com/files/ganeti-${ganeti_version}.tar.gz",
       destination => "/root/src/ganeti-${ganeti_version}.tar.gz",
@@ -72,18 +72,18 @@ class ganeti_tutorial::ganeti::install {
   }
 }
 
-class ganeti_tutorial::ganeti::initialize inherits ganeti_tutorial::ganeti::install {
+class ganeti::ganeti::initialize inherits ganeti::ganeti::install {
   exec {
     "initialize-ganeti":
       command => "${files}/scripts/initialize-ganeti",
       creates => "/var/lib/ganeti/config.data",
       require => [
-        Exec["install-ganeti"], Exec["ifup_br0"], Exec["ifup_eth2"],
+        Exec["install-ganeti"], 
         Exec["modprobe_drbd"], ],
   }
 }
 
-class ganeti_tutorial::ganeti::git inherits ganeti_tutorial::ganeti::install {
+class ganeti::ganeti::git inherits ganeti::ganeti::install {
   package {
     "automake":         ensure => present;
     "autoconf":         ensure => present;

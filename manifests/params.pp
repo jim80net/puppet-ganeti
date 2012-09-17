@@ -1,9 +1,9 @@
-class ganeti_tutorial::params {
+class ganeti::params {
   $image_version  = "0.5.1"
   $gwm_version    = "0.8.1"
   $ubuntu_version = "11.10"
   $cirros_version = "0.3.0"
-  $files          = "/vagrant/modules/ganeti_tutorial/files"
+  $files          = "/vagrant/modules/ganeti/files"
 
   if "$ganeti_version" < "2.4.0" {
     $htools_version = "0.2.8"
@@ -16,7 +16,7 @@ class ganeti_tutorial::params {
     'RedHat': {
       $drbd8_utils_package_name = "drbd83-utils"
       $fab_path                 = "/usr/bin/fab"
-      $ganeti_init_source       = "puppet:///modules/ganeti_tutorial/ganeti.init.redhat"  
+      $ganeti_init_source       = "puppet:///modules/ganeti/ganeti.init.redhat"  
       $ghc_package_name         = "ghc"
       $iputils_arping           = "iputils"
       $kvm_package_name         = "qemu-kvm"

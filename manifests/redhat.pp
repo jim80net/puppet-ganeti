@@ -1,9 +1,9 @@
-class ganeti_tutorial::redhat {
-  include ganeti_tutorial::redhat::drbd
-  include ganeti_tutorial::redhat::htools
-  include ganeti_tutorial::redhat::ganeti
-  include ganeti_tutorial::redhat::ganeti::initialize
-  include ganeti_tutorial::redhat::kvm
+class ganeti::redhat {
+  include ganeti::redhat::drbd
+  include ganeti::redhat::htools
+  include ganeti::redhat::ganeti
+  include ganeti::redhat::ganeti::initialize
+  include ganeti::redhat::kvm
 
   yumrepo {
     "ganeti":
@@ -13,7 +13,7 @@ class ganeti_tutorial::redhat {
   }
 }
 
-class ganeti_tutorial::redhat::drbd inherits ganeti_tutorial::drbd {
+class ganeti::redhat::drbd inherits ganeti::drbd {
   yumrepo {
     "elrepo":
       baseurl         => "http://elrepo.org/linux/elrepo/el6/\$basearch/",
@@ -28,7 +28,7 @@ class ganeti_tutorial::redhat::drbd inherits ganeti_tutorial::drbd {
     "RPM-GPG-KEY-elrepo.org":
       path    => "/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org",
       ensure  => present,
-      source  => "puppet:///modules/ganeti_tutorial/RPM-GPG-KEY-elrepo.org";
+      source  => "puppet:///modules/ganeti/RPM-GPG-KEY-elrepo.org";
   }
 
   package {
@@ -51,7 +51,7 @@ class ganeti_tutorial::redhat::drbd inherits ganeti_tutorial::drbd {
 
 }
 
-class ganeti_tutorial::redhat::htools inherits ganeti_tutorial::htools {
+class ganeti::redhat::htools inherits ganeti::htools {
   Package["libghc6-curl-dev"] {
     require => Yumrepo["ganeti"],
   }
@@ -61,7 +61,7 @@ class ganeti_tutorial::redhat::htools inherits ganeti_tutorial::htools {
   }
 }
 
-class ganeti_tutorial::redhat::ganeti inherits ganeti_tutorial::ganeti::install {
+class ganeti::redhat::ganeti inherits ganeti::ganeti::install {
 
   File["/etc/init.d/ganeti"] {
     require => [ Exec["install-ganeti"], File["/etc/sysconfig/ganeti"], ],
@@ -69,7 +69,7 @@ class ganeti_tutorial::redhat::ganeti inherits ganeti_tutorial::ganeti::install 
 
   exec {
     "patch-daemon-util":
-      command => "/usr/bin/patch -p1 < ${ganeti_tutorial::params::files}/src/daemon-util.patch",
+      command => "/usr/bin/patch -p1 < ${ganeti::params::files}/src/daemon-util.patch",
       cwd     => "/root/src/ganeti-${ganeti_version}",
       unless  => "/bin/grep daemonexec /root/src/ganeti-${ganeti_version}/daemons/daemon-util.in",
       require => [ Ganeti_tutorial::Unpack["ganeti"], Package["patch"], ];
@@ -80,11 +80,11 @@ class ganeti_tutorial::redhat::ganeti inherits ganeti_tutorial::ganeti::install 
   file {
     "/etc/sysconfig/ganeti":
       ensure  => present,
-      source  => "${ganeti_tutorial::params::files}/ganeti.sysconfig",
+      source  => "${ganeti::params::files}/ganeti.sysconfig",
   }
 }
 
-class ganeti_tutorial::redhat::ganeti::initialize inherits ganeti_tutorial::ganeti::initialize {
+class ganeti::redhat::ganeti::initialize inherits ganeti::ganeti::initialize {
   file {
     "/usr/lib/python2.6/site-packages/ganeti":
       ensure => link,
@@ -97,7 +97,7 @@ class ganeti_tutorial::redhat::ganeti::initialize inherits ganeti_tutorial::gane
   }
 }
 
-class ganeti_tutorial::redhat::kvm inherits ganeti_tutorial::kvm {
+class ganeti::redhat::kvm inherits ganeti::kvm {
   file {
     "/usr/bin/kvm":
       ensure  => link,
@@ -105,7 +105,7 @@ class ganeti_tutorial::redhat::kvm inherits ganeti_tutorial::kvm {
   }
 }
 
-class ganeti_tutorial::redhat::gwm inherits ganeti_tutorial::gwm {
+class ganeti::redhat::gwm inherits ganeti::gwm {
   file {
     "/usr/local/bin/pip":
       ensure  => link,

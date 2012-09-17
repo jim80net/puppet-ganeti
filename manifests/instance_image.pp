@@ -1,6 +1,6 @@
-class ganeti_tutorial::instance_image {
-  $image_version  = $ganeti_tutorial::params::image_version
-  $cirros_version = $ganeti_tutorial::params::cirros_version
+class ganeti::instance_image {
+  $image_version  = $ganeti::params::image_version
+  $cirros_version = $ganeti::params::cirros_version
 
   package {
     "dump":   ensure => installed;
@@ -11,15 +11,15 @@ class ganeti_tutorial::instance_image {
     "/etc/default/ganeti-instance-image":
       ensure  => present,
       require => Exec["install-instance-image"],
-      content => template("ganeti_tutorial/instance-image/defaults.erb");
+      content => template("ganeti/instance-image/defaults.erb");
     "/etc/ganeti/instance-image/variants.list":
       ensure  => present,
       require => Exec["install-instance-image"],
-      source  => "${ganeti_tutorial::params::files}/instance-image/variants.list";
+      source  => "${ganeti::params::files}/instance-image/variants.list";
     "/etc/ganeti/instance-image/variants/cirros.conf":
       ensure  => present,
       require => Exec["install-instance-image"],
-      source  => "${ganeti_tutorial::params::files}/instance-image/cirros.conf";
+      source  => "${ganeti::params::files}/instance-image/cirros.conf";
     "/etc/ganeti/instance-image/variants/default.conf":
       ensure  => "/etc/ganeti/instance-image/variants/cirros.conf",
       require => [ Exec["install-instance-image"],
@@ -31,10 +31,10 @@ class ganeti_tutorial::instance_image {
       ensure  => present,
       mode    => 755,
       require => Exec["install-instance-image"],
-      source  => "puppet:///modules/ganeti_tutorial/instance-image/hooks/zz_no-net";
+      source  => "puppet:///modules/ganeti/instance-image/hooks/zz_no-net";
   }
 
-  ganeti_tutorial::wget {
+  ganeti::wget {
     "cirros-root":
       require     => Exec["install-instance-image"],
       source      => "http://staff.osuosl.org/~ramereth/ganeti-tutorial/cirros-${cirros_version}-${hardwaremodel}.tar.gz",
@@ -45,35 +45,35 @@ class ganeti_tutorial::instance_image {
       require     => File["/root/src"];
   }
 
-  ganeti_tutorial::unpack {
+  ganeti::unpack {
     "instance-image":
       source  => "/root/src/ganeti-instance-image-${image_version}.tar.gz",
       cwd     => "/root/src/",
       creates => "/root/src/ganeti-instance-image-${image_version}",
-      require => Ganeti_tutorial::Wget["instance-image-tgz"];
+      require => Ganeti::Wget["instance-image-tgz"];
   }
 
   exec {
     "install-instance-image":
-      command => "/vagrant/modules/ganeti_tutorial/files/scripts/install-instance-image",
+      command => "/vagrant/modules/ganeti/files/scripts/install-instance-image",
       cwd     => "/root/src/ganeti-instance-image-${image_version}",
       creates => "/srv/ganeti/os/image/",
-      require => [ Ganeti_tutorial::Unpack["instance-image"], 
+      require => [ Ganeti::Unpack["instance-image"], 
         Package["dump"], Package["kpartx"], File["/root/puppet"], ];
   }
 }
 
-class ganeti_tutorial::instance_image::ubuntu {
-  $ubuntu_version = "${ganeti_tutorial::params::ubuntu_version}"
+class ganeti::instance_image::ubuntu {
+  $ubuntu_version = "${ganeti::params::ubuntu_version}"
 
   file {
     "/etc/ganeti/instance-image/variants/ubuntu-11.10.conf":
       ensure  => present,
       require => Exec["install-instance-image"],
-      source  => "${ganeti_tutorial::params::files}/instance-image/ubuntu-11.10.conf";
+      source  => "${ganeti::params::files}/instance-image/ubuntu-11.10.conf";
   }
 
-  ganeti_tutorial::wget {
+  ganeti::wget {
     "ubuntu-root":
       require     => Exec["install-instance-image"],
       source      => "http://staff.osuosl.org/~ramereth/ganeti-tutorial/ubuntu-${ubuntu_version}-${hardwaremodel}.tar.gz",
