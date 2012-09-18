@@ -5,12 +5,6 @@ class ganeti::params {
   $cirros_version = "0.3.0"
   $files          = "/vagrant/modules/ganeti/files"
 
-  if "$ganeti_version" < "2.4.0" {
-    $htools_version = "0.2.8"
-  } else {
-    $htools_version = "0.3.1"
-  }
-
   # OS parameters 
   case $::osfamily {
     'RedHat': {
@@ -29,6 +23,7 @@ class ganeti::params {
       $python_pyinotify         = "python-inotify"
       $python_pyparsing         = "pyparsing"
       $vim_package_name         = "vim-enhanced"
+      $ganeti_version           = "2.5.1" # This is what is available at ftp.osuosl.org
     }
 
     'Debian': {
@@ -47,6 +42,14 @@ class ganeti::params {
       $python_pyinotify         = "python-pyinotify"
       $python_pyparsing         = "python-pyparsing"
       $vim_package_name         = "vim"
+      $ganeti_version           = "2.6.0" # Arbitrary. Define what you want here.
     }
   }
+
+  if "$ganeti_version" < "2.4.0" {
+    $htools_version = "0.2.8"
+  } else {
+    $htools_version = "0.3.1"
+  }
+
 }

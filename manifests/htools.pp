@@ -19,7 +19,7 @@ class ganeti::htools {
       name    => $ganeti::params::libghc_parallel_dev;
   }
 
-  if "$ganeti_version" < "2.5.0" {
+  if "$ganeti::params::ganeti_version" < "2.5.0" {
     ganeti::unpack {
       "htools":
         source  => "/root/src/ganeti-htools-${ganeti::params::htools_version}.tar.gz",
