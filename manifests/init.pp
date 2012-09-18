@@ -2,7 +2,7 @@
 
 class ganeti inherits ganeti::params {
   include ganeti::install_deps
-  include ganeti::hosts
+  #include ganeti::hosts
   include ganeti::drbd
 
   $files  = $ganeti::params::files
