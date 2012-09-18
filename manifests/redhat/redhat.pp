@@ -14,23 +14,6 @@ class ganeti::redhat {
 }
 
 class ganeti::redhat::drbd inherits ganeti::drbd {
-  yumrepo {
-    "elrepo":
-      baseurl         => "http://elrepo.org/linux/elrepo/el6/\$basearch/",
-      mirrorlist      => "http://elrepo.org/mirrors-elrepo.el6",
-      enabled         => "1",
-      gpgcheck        => "1",
-      gpgkey          => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org",
-      require         => File["RPM-GPG-KEY-elrepo.org"];
-  }
-
-  file {
-    "RPM-GPG-KEY-elrepo.org":
-      path    => "/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org",
-      ensure  => present,
-      source  => "puppet:///modules/ganeti/RPM-GPG-KEY-elrepo.org";
-  }
-
   package {
     "kmod-drbd83":
       ensure  => installed,
@@ -49,16 +32,6 @@ class ganeti::redhat::drbd inherits ganeti::drbd {
       Yumrepo["elrepo"], ],
   }
 
-}
-
-class ganeti::redhat::htools inherits ganeti::htools {
-  Package["libghc6-curl-dev"] {
-    require => Yumrepo["ganeti"],
-  }
-
-  package {
-    "libcurl-devel": ensure => installed;
-  }
 }
 
 class ganeti::redhat::ganeti inherits ganeti::ganeti::install {

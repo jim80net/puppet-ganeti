@@ -1,9 +1,10 @@
 #$host_ip = network_eth1
 #$drbd_ip = "172.26.31.1"
 $git     = false
-$ganeti_version = "2.5.2"
+$ganeti_version = "2.5.1"
 
 include ganeti
+include ganeti::install_deps
 #include ganeti::networking
 include ganeti::kvm
 #include ganeti::instance_image
