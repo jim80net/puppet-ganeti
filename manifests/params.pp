@@ -16,7 +16,7 @@ class ganeti::params {
     'RedHat': {
       $drbd8_utils_package_name = "drbd83-utils"
       $fab_path                 = "/usr/bin/fab"
-      $ganeti_init_source       = "puppet:///modules/ganeti/ganeti.init.redhat"  
+      $ganeti_init_source       = "puppet:///modules/ganeti.init.redhat"  
       $ghc_package_name         = "ghc"
       $iputils_arping           = "iputils"
       $kvm_package_name         = "qemu-kvm"
