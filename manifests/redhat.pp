@@ -43,7 +43,7 @@ class ganeti::redhat::drbd inherits ganeti::drbd {
 
   Exec["modprobe_drbd"] {
     require => [
-      File["/etc/modprobe.d/local.conf"],
+      File["/etc/modprobe.d/drbd.conf"],
       Package["drbd8-utils"],
       Package["kmod-drbd83"],
       Yumrepo["elrepo"], ],
@@ -72,7 +72,7 @@ class ganeti::redhat::ganeti inherits ganeti::ganeti::install {
       command => "/usr/bin/patch -p1 < ${ganeti::params::files}/src/daemon-util.patch",
       cwd     => "/root/src/ganeti-${ganeti_version}",
       unless  => "/bin/grep daemonexec /root/src/ganeti-${ganeti_version}/daemons/daemon-util.in",
-      require => [ Ganeti_tutorial::Unpack["ganeti"], Package["patch"], ];
+      require => [ Ganeti::Unpack["ganeti"], Package["patch"], ];
   }
 
   package { "patch": ensure => installed; }
