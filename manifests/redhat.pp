@@ -91,8 +91,8 @@ class ganeti::redhat::ganeti::initialize inherits ganeti::ganeti::initialize {
       target => "/usr/local/lib/python2.6/site-packages/ganeti";
   }
   Exec["initialize-ganeti"] {
-    require => [ Exec["install-ganeti"], Exec["ifup_br0"],
-      Exec["ifup_eth2"], Exec["modprobe_drbd"],
+    require => [ Exec["install-ganeti"], 
+      Exec["modprobe_drbd"],
       File["/usr/lib/python2.6/site-packages/ganeti"], ],
   }
 }
