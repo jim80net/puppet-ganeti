@@ -1,10 +1,13 @@
 class ganeti::redhat::repo {
+  Yumrepo {
+    enabled => "1",
+    gpgcheck => "1",
+  }
+
   yumrepo {
     "elrepo":
       baseurl         => "http://elrepo.org/linux/elrepo/el6/\$basearch/",
       mirrorlist      => "http://elrepo.org/mirrors-elrepo.el6",
-      enabled         => "1",
-      gpgcheck        => "1",
       gpgkey          => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org",
       require         => File["RPM-GPG-KEY-elrepo.org"];
   }
@@ -15,5 +18,18 @@ class ganeti::redhat::repo {
       ensure  => present,
       source  => "puppet:///modules/ganeti/RPM-GPG-KEY-elrepo.org";
   }
+
+  yumrepo {
+    "osuosl.org":
+      baseurl	=> "http://ftp.osuosl.org/pub/osl/ganeti-centos-6/\$basearch/",
+      gpgcheck  => "0",
+  }
+ 
+  exec { "/usr/bin/yum makecache":
+	require => Yumrepo["elrepo", "osuosl.org"],
+	subscribe => Yumrepo["elrepo", "osuosl.org"],
+	refreshonly => true;
+  }
+
 }
 
