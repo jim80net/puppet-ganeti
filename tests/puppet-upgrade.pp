@@ -1,1 +1,0 @@
-include ganeti::puppet
