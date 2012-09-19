@@ -25,6 +25,10 @@ This module supports changing of the versions via two variables in
   * Version of ganeti to use. Currently only supports 2.4.5, 2.5.1, and any of
     the tagged versioned releases.
 
+# Testing
+
+This module is presently being developed on CentOS 6.3 and ganeti version 2.5.1 and puppet version 2.6.6
+
 # Copyright
 
 This work is licensed under a [Creative Commons Attribution-Share Alike 3.0
