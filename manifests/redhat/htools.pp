@@ -3,6 +3,7 @@ class ganeti::redhat::htools {
   include ganeti::htools
 
   package {
-    "libcurl-devel": 
+    "libcurl-devel": ;
+    "ganeti-htools": ;# From osuosl.org repo
   }
 }

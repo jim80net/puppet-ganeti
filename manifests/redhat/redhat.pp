@@ -13,27 +13,6 @@ class ganeti::redhat {
   }
 }
 
-class ganeti::redhat::drbd inherits ganeti::drbd {
-  package {
-    "kmod-drbd83":
-      ensure  => installed,
-      require => Yumrepo["elrepo"];
-  }
-
-  Package["drbd8-utils"] {
-    require => Yumrepo["elrepo"],
-  }
-
-  Exec["modprobe_drbd"] {
-    require => [
-      File["/etc/modprobe.d/drbd.conf"],
-      Package["drbd8-utils"],
-      Package["kmod-drbd83"],
-      Yumrepo["elrepo"], ],
-  }
-
-}
-
 class ganeti::redhat::ganeti inherits ganeti::ganeti::install {
 
   File["/etc/init.d/ganeti"] {

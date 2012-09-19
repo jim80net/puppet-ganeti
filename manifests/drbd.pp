@@ -1,11 +1,11 @@
-class ganeti::drbd inherits ganeti::params {
-  $package_name = $ganeti::params::drbd8_utils_package_name
+class ganeti::drbd {
+  require ganeti::params
 
-    package {
-      "drbd8-utils":
-        ensure  => installed,
-        name    => $package_name,
-    }
+  package {
+    "drbd8-utils":
+      ensure  => installed,
+      name    => $ganeti::params::drbd8_utils_package_name,
+  }
 
   file {
     "/etc/modules":
