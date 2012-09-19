@@ -49,14 +49,6 @@ class ganeti::redhat::ganeti::initialize inherits ganeti::ganeti::initialize {
   }
 }
 
-class ganeti::redhat::kvm inherits ganeti::kvm {
-  file {
-    "/usr/bin/kvm":
-      ensure  => link,
-      target  => "/usr/libexec/qemu-kvm",
-  }
-}
-
 class ganeti::redhat::gwm inherits ganeti::gwm {
   file {
     "/usr/local/bin/pip":
