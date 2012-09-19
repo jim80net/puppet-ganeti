@@ -1,5 +1,7 @@
 class ganeti::ganeti::install {
   include ganeti::htools
+  include ganeti::drbd
+  include ganeti::kvm
 
   $ganeti_init_source = $ganeti::params::ganeti_init_source
   $files              = $ganeti::params::files
