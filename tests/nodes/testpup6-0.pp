@@ -17,4 +17,4 @@ volume_group {
     physical_volumes => ["/dev/vdb", "/dev/vdc"]
 }
 
-include ganeti::redhat::ganeti::install
+include ganeti

@@ -2,32 +2,31 @@
 
 This module was modified from: [Puppet Configs for a Ganeti Tutorial](https://github.com/ramereth/puppet-ganeti-tutorial)
 
-This module is customized for use on a network with prefixes 172.26. This is hard coded.
 It will setup ganeti nodes with the basics to install
-[Ganeti](http://code.google.com/p/ganeti/), [Ganeti Instance
-Image](http://code.osuosl.org/projects/ganeti-image), and [Ganeti Web
-Manager](http://code.osuosl.org/projects/ganeti-webmgr).
+[Ganeti](http://code.google.com/p/ganeti/). 
+
+[Ganeti Instance Image](http://code.osuosl.org/projects/ganeti-image), and [Ganeti Web
+Manager](http://code.osuosl.org/projects/ganeti-webmgr) are still in development.
 
 # Requirements
 
-This assumes that you have two to three Ubuntu 11.10 VMs setup inside of
-VirtualBox. Images can be downloaded from
-[here](http://ftp.osuosl.org/pub/osl/ganeti-tutorial/).
+This module will not configure networking. Please ensure that your node is configured networking-wise. 
+This module will not configure storage, though as you will note in tests/nodes/testpup-6-0.pp, that one might be able to 
+  realize this with other modules. That example uses puppetlabs-lvm, available at github.
+This module will not initialize the cluster. Given the low frequency of such an action, this feature will eventually be removed from the code. 
+
 
 # Switching Ganeti versions
 
-This module supports changing of the versions via two variables in
-`nodes/node#.pp`.
-
-* `git` = boolean (default: false)
-  * This pulls ganeti from its git repository if set to true.
-* `ganeti_version` = string (default: 2.5.1)
-  * Version of ganeti to use. Currently only supports 2.4.5, 2.5.1, and any of
-    the tagged versioned releases.
+This was supported in the parent of this fork. In this instance, I will be removing this ability, in favor of simpler code. 
 
 # Testing
 
-This module is presently being developed on CentOS 6.3 and ganeti version 2.5.1 and puppet version 2.6.6
+This module is presently being developed on :
+  CentOS 6.3 
+  drbd 8.3
+  ganeti 2.5.1 of the osuosl.org variety. 
+  puppet version 2.6.6
 
 # Copyright
 
