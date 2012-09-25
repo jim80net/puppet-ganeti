@@ -23,7 +23,6 @@ class ganeti::params {
       $python_openssl           = "pyOpenSSL"
       $python_pyinotify         = "python-inotify"
       $python_pyparsing         = "pyparsing"
-      $vim_package_name         = "vim-enhanced"
       $ganeti_version           = "2.5.1" # This is what is available at ftp.osuosl.org
     }
 
@@ -43,7 +42,6 @@ class ganeti::params {
       $python_openssl           = "python-openssl"
       $python_pyinotify         = "python-pyinotify"
       $python_pyparsing         = "python-pyparsing"
-      $vim_package_name         = "vim"
       $ganeti_version           = "2.6.0" # Arbitrary. Define what you want here.
     }
   }

@@ -24,7 +24,6 @@ class ganeti::install_deps {
     # Misc
     "git":              ;
     "screen":           ;
-    "vim":              name => $ganeti::params::vim_package_name
     }
 
   file {
