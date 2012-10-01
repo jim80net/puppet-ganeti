@@ -1,14 +1,8 @@
 class ganeti::redhat::drbd inherits ganeti::drbd {
-  require ganeti::redhat::repo
-
-  Package["drbd8-utils"] {
-    require => Yumrepo["elrepo"],
-  }
+  include ganeti::redhat::repo
 
   package {
     "kmod-drbd83":
-      ensure  => present,
-      require => Yumrepo["elrepo"];
   }
 
 

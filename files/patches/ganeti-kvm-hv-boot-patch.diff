@@ -1,0 +1,17 @@
+--- /usr/local/lib/python2.6/site-packages/ganeti/hypervisor/hv_kvm.py.orig	2012-02-01 17:00:37.063006929 +1300
++++ /usr/local/lib/python2.6/site-packages/ganeti/hypervisor/hv_kvm.py	2012-02-01 17:29:08.129677448 +1300
+@@ -525,10 +525,10 @@
+       kvm_cmd.extend(['-no-acpi'])
+ 
+     hvp = instance.hvparams
+-    boot_disk = hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_DISK
+-    boot_cdrom = hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_CDROM
+-    boot_floppy = hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_FLOPPY
+-    boot_network = hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_NETWORK
++    boot_disk = (hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_DISK) and (hvp[constants.HV_KERNEL_PATH] == "")
++    boot_cdrom = (hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_CDROM) and (hvp[constants.HV_KERNEL_PATH] == "")
++    boot_floppy = (hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_FLOPPY) and (hvp[constants.HV_KERNEL_PATH] == "")
++    boot_network = (hvp[constants.HV_BOOT_ORDER] == constants.HT_BO_NETWORK) and (hvp[constants.HV_KERNEL_PATH] == "")
+ 
+     if hvp[constants.HV_KVM_FLAG] == constants.HT_KVM_ENABLED:
+       kvm_cmd.extend(["-enable-kvm"])

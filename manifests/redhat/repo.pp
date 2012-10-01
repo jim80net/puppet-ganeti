@@ -27,7 +27,6 @@ class ganeti::redhat::repo {
  
   exec { "/usr/bin/yum makecache":
 	require => Yumrepo["elrepo", "osuosl.org"],
-	subscribe => Yumrepo["elrepo", "osuosl.org"],
 	refreshonly => true;
   }
 

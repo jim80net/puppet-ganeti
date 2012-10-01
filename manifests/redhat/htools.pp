@@ -1,5 +1,5 @@
 class ganeti::redhat::htools {
-  require ganeti::redhat::repo
+  include ganeti::redhat::repo
   include ganeti::htools
 
   package {

@@ -1,10 +1,10 @@
 #!/bin/bash
-/usr/local/sbin/gnt-cluster init \
-    --vg-name=ganeti -s 33.33.34.11 \
-    --master-netdev=br0 \
+/usr/sbin/gnt-cluster init \
+    --vg-name=ganeti -s 172.26.31.64 \
+    --master-netdev=br20 \
     -I hail \
-    -H kvm:kernel_path=/boot/vmlinuz-kvmU,initrd_path=/boot/initrd-kvmU,root_path=/dev/sda2,nic_type=e1000,disk_type=scsi,vnc_bind_address=0.0.0.0,serial_console=true \
-    -N link=br0 --enabled-hypervisors=kvm \
-    ganeti.example.org
-
-/usr/local/sbin/gnt-cluster modify --reserved-lvs=ganeti/swap
+    -H kvm:kernel_path="",initrd_path=/boot/initrd-kvmU,security_model=user,security_domain=ganetiguest,use_chroot=true,usb_mouse=tablet,serial_console=true,vnc_bind_address='0.0.0.0' \
+    --backend-parameters memory=512M \ 
+    --enabled-hypervisors=kvm \
+    --nic-parameters link=br20 \
+    ganeti.ics.loc

@@ -1,9 +1,7 @@
 class ganeti::kvm {
-  include ganeti::params
   
   package {
     "kvm":  
-      name => $ganeti::params::kvm_package_name,
       ensure => present,
   }
 
